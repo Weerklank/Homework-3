@@ -3,6 +3,9 @@ var special = ["!","@","#","$","%","^","&","*","(",")","-","+","_","=","{","}","
 var numbers = ["1","2","3","4","5","6","7","8","9","0"];
 var lcLetters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 var ucLetters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+var arrays = []
+
+
 
 
 // Assignment Code
@@ -19,7 +22,7 @@ function writePassword() {
       return
 
     }
-    else if (amount < 8){
+    else if (amount < 8) {
 
       alert("8 or more characters is required to generate a paswword.")
       return
@@ -47,7 +50,39 @@ function writePassword() {
 
   }
 
+// Special characters into array?
+  if (hasSpecial === true) {
+    arrays.push(special)
+  }
+// Numbers into array?
+  if (hasNumbers === true) {
+    arrays.push(numbers)
+  }
+// lowercase letters into array?
+  if (hasLcLetters === true) {
+    arrays.push(lcLetters)
+  }
+// uppercase letters into array?
+  if (hasUcLetters === true) {
+    arrays.push(ucLetters)
+  }
+
+  function getRandomValue (arr) {
+    //Math.random => 0.001 - 0.999
+    return arr[Math.floor(Math.random() * arr.length)]
+  }
   
+  function generatePassword() {
+    var i = ""
+    while (i.length < +amount) {
+      var chars = getRandomValue(arrays)
+      console.log(chars)
+      i += getRandomValue(chars);
+      console.log(i)
+    }
+    arrays = []
+    return i
+  }
 
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
@@ -56,5 +91,24 @@ function writePassword() {
 
 }
 
+// Copy Text Function
+function myFunction() {
+  /* Get the text field */
+  var copyText = document.getElementById("password");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+}
+
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
+
+
+
